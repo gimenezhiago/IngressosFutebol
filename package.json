@@ -1,0 +1,21 @@
+{
+  "name": "futebol-ingressos",
+  "version": "1.0.0",
+  "description": "API RESTful para sistema de compra de ingressos de futebol brasileiro",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "@fastify/swagger": "^9.5.0",
+    "@fastify/swagger-ui": "^5.2.3",
+    "dotenv": "^16.5.0",
+    "fastify": "^5.3.3",
+    "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
