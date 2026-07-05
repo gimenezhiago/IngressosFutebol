@@ -2,12 +2,19 @@ import 'dotenv/config';
 import Fastify from 'fastify';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
+import cors from '@fastify/cors'; // 1. IMPORTAÇÃO DO CORS ADICIONADA AQUI
 
 import { registerRoutes } from './routes/index.js';
-import { errorHandler }  from './errors/errorHandler.js';
+import { errorHandler } from './errors/errorHandler.js';
 
 const fastify = Fastify({
-  logger: true,
+  logger: true, 
+});
+
+// 2. REGISTRO DO CORS ADICIONADO AQUI (Antes do Swagger e das Rotas)
+await fastify.register(cors, {
+  origin: '*', // Permite acessos do seu front-end local
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
 });
 
 // Swagger / OpenAPI
