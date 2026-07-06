@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingressos Futebol</title>
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,6 +21,18 @@
                 </div>
         </section>
     </main>
+
+    <div id="modal-compra" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="fecharModal()">&times;</span>
+            <h2 id="modal-jogo-titulo">Carregando detalhes...</h2>
+            <p id="modal-jogo-info" class="text-muted"></p>
+            
+            <h3 class="section-subtitle">Escolha seu Setor</h3>
+            <div id="modal-setores-container">
+                </div>
+        </div>
+    </div>
 
     <script src="script.js" defer></script>
 </body>
