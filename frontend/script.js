@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = window.location.origin;
 // Simula o usuário logado (baseado no seed.sql que inseriu o Carlos Silva com ID 1)
 const USUARIO_LOGADO_ID = 1; 
 

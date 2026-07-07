@@ -1,11 +1,18 @@
 import 'dotenv/config';
+import { promises as fs } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import Fastify from 'fastify';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
-import cors from '@fastify/cors'; // 1. IMPORTAÇÃO DO CORS ADICIONADA AQUI
+import cors from '@fastify/cors';
 
 import { registerRoutes } from './routes/index.js';
 import { errorHandler } from './errors/errorHandler.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const frontendDir = path.resolve(__dirname, '../frontend');
 
 const fastify = Fastify({
   logger: true, 
@@ -43,6 +50,21 @@ await fastify.register(swaggerUi, {
   },
 });
 
+fastify.get('/', async (request, reply) => {
+  const html = await fs.readFile(path.join(frontendDir, 'index.html'), 'utf8');
+  return reply.type('text/html').send(html);
+});
+
+fastify.get('/style.css', async (request, reply) => {
+  const css = await fs.readFile(path.join(frontendDir, 'style.css'), 'utf8');
+  return reply.type('text/css').send(css);
+});
+
+fastify.get('/script.js', async (request, reply) => {
+  const js = await fs.readFile(path.join(frontendDir, 'script.js'), 'utf8');
+  return reply.type('application/javascript').send(js);
+});
+
 // Rotas
 await registerRoutes(fastify);
 
@@ -50,7 +72,7 @@ await registerRoutes(fastify);
 fastify.setErrorHandler(errorHandler);
 
 // Inicialização
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = Number(process.env.PORT) || 3001;
 
 try {
   await fastify.listen({ port: PORT, host: '0.0.0.0' });
